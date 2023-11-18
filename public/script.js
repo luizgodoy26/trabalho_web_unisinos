@@ -1,5 +1,6 @@
 const blogPosts = document.getElementById("blogPosts");
 
+// Carrega um post específico com base no título da URL
 function loadPost() {
     const urlParams = new URLSearchParams(window.location.search);
     const postTitle = urlParams.get('post');
@@ -12,11 +13,9 @@ function loadPost() {
         .then(response => response.json())
         .then(post => {
             const blogPost = document.getElementById('blog-post');
-
-            // Limpe o conteúdo existente no elemento
             blogPost.innerHTML = '';
 
-            // Renderize o título e a imagem do post
+            // Renderiza o título e a imagem do post
             const postHeader = document.createElement('div');
             postHeader.innerHTML = `
                 <h2>${post.title}</h2>
@@ -24,7 +23,7 @@ function loadPost() {
             `;
             blogPost.appendChild(postHeader);
 
-            // Renderize o conteúdo do post
+            // Renderiza o conteúdo do post
             post.content.forEach(item => {
                 const element = createElementForItem(item);
                 if (element) {
@@ -32,11 +31,11 @@ function loadPost() {
                 }
             });
 
-            // Adicione um formulário para adicionar novos comentários
+            // Adiciona um formulário para adicionar novos comentários
             const commentForm = createCommentForm(postTitle);
             blogPost.appendChild(commentForm);
 
-            // Renderize os comentários
+            // Renderiza os comentários
             const commentsSection = document.createElement('div');
             commentsSection.classList.add('comments-section');
             commentsSection.innerHTML = '<h3>Comentários</h3>';
@@ -47,12 +46,11 @@ function loadPost() {
             });
 
             blogPost.appendChild(commentsSection);
-
-            // Restante do código...
         });
 }
 
-// Função auxiliar para criar elementos com base no tipo do item
+
+// Cria elementos com base no tipo do item
 function createElementForItem(item) {
     if (item.type === 'paragraph') {
         const paragraph = document.createElement('p');
@@ -76,7 +74,8 @@ function createElementForItem(item) {
     return null;
 }
 
-// Função auxiliar para criar o formulário de comentários
+
+// Cria o formulário de comentários
 function createCommentForm(postTitle) {
     const commentForm = document.createElement('form');
     commentForm.innerHTML = `
@@ -88,12 +87,12 @@ function createCommentForm(postTitle) {
         <button type="submit">Enviar Comentário</button>
     `;
 
+    // Envia um novo comentário para o servidor
     commentForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const author = document.getElementById('author').value;
         const text = document.getElementById('text').value;
 
-        // Envie o novo comentário para o servidor
         fetch(`/api/posts/${postTitle}/comments`, {
             method: 'POST',
             headers: {
@@ -103,12 +102,12 @@ function createCommentForm(postTitle) {
         })
         .then(response => response.json())
         .then(newComment => {
-            // Adicione o novo comentário à seção de comentários
+            // Adiciona o novo comentário à seção de comentários
             const commentElement = createCommentElement(newComment);
             const commentsSection = document.querySelector('.comments-section');
             commentsSection.appendChild(commentElement);
 
-            // Limpe o formulário
+            // Limpa o formulário
             commentForm.reset();
         });
     });
@@ -116,7 +115,7 @@ function createCommentForm(postTitle) {
     return commentForm;
 }
 
-// Função auxiliar para criar elementos de comentários
+// Cria elementos para os comentários
 function createCommentElement(comment) {
     const commentElement = document.createElement('div');
     commentElement.classList.add('comment');
@@ -126,14 +125,14 @@ function createCommentElement(comment) {
     return commentElement;
 }
 
-
 const blogList = document.getElementById("blog-list");
 
+// Carrega todos os posts
 function loadPosts() {
     fetch('/api/posts')
         .then(response => response.json())
         .then(data => {
-            console.log('Posts carregados:', data); // Adicione esta linha para depurar
+            console.log('Posts carregados:', data);
 
             data.posts.forEach(post => {
                 const postCard = document.createElement('div');
@@ -143,6 +142,7 @@ function loadPosts() {
                     <h2>${post.title}</h2>
                 `;
 
+                // Navega para a página do post quando o card é clicado
                 postCard.addEventListener('click', () => {
                     window.location.href = `post.html?post=${encodeURIComponent(post.title)}`;
                 });
@@ -151,14 +151,13 @@ function loadPosts() {
             });
         })
         .catch(error => {
-            console.error('Erro ao carregar posts:', error); // Adicione esta linha para depurar
+            console.error('Erro ao carregar posts:', error);
         });
 }
 
-
+// Carrega os posts na página inicial ou na página do post individual
 if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
     loadPosts();
 } else if (window.location.pathname === '/post.html') {
     loadPost();
 }
-

@@ -2,17 +2,18 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f5f5f5;
+    background-color: #042940;
+    color: #fff;
 }
 
 header {
-    background-color: #333;
+    background-color: #005C53;
     color: #fff;
     padding: 10px;
     display: flex;
-    justify-content: space between;
+    justify-content: space-between;
     align-items: center;
-}
+}d
 
 h1 {
     margin: 0;
@@ -52,30 +53,39 @@ footer {
 
 .post-card {
     cursor: pointer;
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     transition: 0.3s;
     border-radius: 15px;
     max-width: 300px;
-    height: 100%; 
-    display: flex;
-    flex-direction: column;
+    height: 100%;
+    position: relative; 
+    transition: transform 0.3s ease-in-out;
+
 }
 
 .post-card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+    
+    transform: scale(1.05);
 }
 
 .post-card img {
-    border-radius: 15px 15px 0 0;
+    border-radius: 15px;
     padding: 0;
     margin: 0;
     max-width: 100%;
 }
 
 .post-card h2 {
-    border-radius: 0;
-    padding: 0 0 10px 0;
-    margin: 10px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 0 0 15px 15px;
+    padding: 10px;
+    margin: 0;
+    color: #fff;
     max-width: 100%;
 }
 
@@ -86,34 +96,34 @@ footer {
     justify-content: center;
     align-items: center;
     text-align: justify;
+    max-width: 800px;
+    max-width: 75%;
 }
+
+
 
 #blog-post .caption {
     font-style: italic;
     color: #777;
     font-size: 14px;
-}
-
-.article {
-    background-color: #fff;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    width: 30%;
-    display: flex;
+    text-align: center;
 }
 
 p {
     margin: 10px 0;
-    max-width: 75%;
 }
 
 input, textarea {
     width: 375px;
     border-radius: 15px;
     border-width: 0.5px;
-    border-color: #333;
+    border-color: #9FC131;
     padding: 5px;
+}
+
+input:focus, textarea:focus {
+    outline: #DBF227; 
+    box-shadow: 0 0 5px rgba(218, 242, 39, 0.904); 
 }
 
 img {
@@ -121,7 +131,7 @@ img {
     height: auto;
     max-height: 500px;
     border-radius: 15px;
-    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1); 
+    box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .blog-title {
@@ -129,48 +139,61 @@ img {
     text-decoration: none;
 }
 
-.blog-post {
+#blog-post {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
+    background-color: #fff;
+    color: #000;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 30%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+}
+
+#blog-post p {
+    width: 75%;
+    margin: 10px 0;
+    text-align: justify;
 }
 
 form {
     margin-top: 20px;
     display: flex;
     flex-direction: column;
-    text-align: center;
-    align-items: center;
+    text-align: left;
+    align-items: left;
+    justify-content: left;
 }
 
-
-form button{
+form button {
     margin-top: 20px;
     border-radius: 15px;
-    border-width: 0px;    
+    border-width: 0px;
     width: 150px!important;
     cursor: pointer;
-    padding: 5px;    
+    padding: 5px;
     transition: all 0.4s;
-    background: #1875FF;
-    color: white;
-    box-shadow: 0px 14px 56px -9px #1875FF;
-
+    background: #DBF227;
+    color: #042940;
+    box-shadow: 0px 14px 56px -9px #DBF227;
 }
 
-
-form button:hover{
+form button:hover {
     margin-top: 20px;
     border-radius: 15px;
-    background-color: #1667e0;
+    background-color: #9FC131;
     border-width: 0px;
 }
 
 .comments-section {
-    margin-top: 20px;    
+    margin-top: 20px;
     width: 375px;
 }
-
 
 .comment {
     margin-bottom: 10px;
@@ -178,8 +201,58 @@ form button:hover{
     border: 1px solid #ddd;
     background-color: #f9f9f9;
     border-radius: 15px;
+    color: #042940;
 }
 
 .comment p {
     margin: 0;
+}
+
+.comment p strong {
+    color: #005C53;
+}
+
+#banner {
+    position: relative;
+    width: 100%;
+    height: 450px;
+    background: url('/images/banner.jpg') center/cover no-repeat;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+#banner-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+#banner:hover #banner-overlay {
+    background: rgba(0, 0, 0, 0.5);
+    transition: 0.3s;
+}
+
+#banner-content {
+    z-index: 1;
+    text-align: left;
+    padding-left: 60px;
+}
+
+#banner h1,
+#banner p {
+    font-size: 2em;
+    margin: 0;
+}
+
+.center {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+    margin: 20px;
 }
